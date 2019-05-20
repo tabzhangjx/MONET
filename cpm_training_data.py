@@ -40,8 +40,9 @@ gt_content = open('label.txt', 'rb').readlines()
 
 for idx, line in enumerate(gt_content):
     line = line.split()
-    cur_img_path = "image/" + line[0]
+    cur_img_path = "image/" + line[0].decode(encoding='utf-8')
     cur_img = cv2.imread(cur_img_path)
+
     if os.path.isfile(cur_img_path) == False:
         continue
     
@@ -90,8 +91,12 @@ for idx, line in enumerate(gt_content):
         heatmap_output_image[:, int(heatmap_size / 2 - math.floor(heatmap_image.shape[1] / 2)): int(heatmap_size / 2 + math.floor(heatmap_image.shape[1] / 2) + heatmap_offset), :] = heatmap_image
         cur_hand_joints_x = map(lambda x: x + (heatmap_size / 2 - math.floor(heatmap_image.shape[1] / 2)),cur_hand_joints_x)
 
-        cur_hand_joints_x = np.asarray(cur_hand_joints_x)
-        cur_hand_joints_y = np.asarray(cur_hand_joints_y)
+        #cur_hand_joints_x = np.asarray(cur_hand_joints_x)
+        #cur_hand_joints_y = np.asarray(cur_hand_joints_y)
+
+        cur_hand_joints_x = list(cur_hand_joints_x)
+        cur_hand_joints_y = list(cur_hand_joints_y)
+        #print(cur_hand_joints_x)
 
         if SHOW_INFO:
             hmap = np.zeros((heatmap_size, heatmap_size))
@@ -125,9 +130,15 @@ for idx, line in enumerate(gt_content):
         heatmap_output_image[int(heatmap_size / 2 - math.floor(heatmap_image.shape[0] / 2)): int(heatmap_size / 2 + math.floor(heatmap_image.shape[0] / 2) + heatmap_offset), :, :] = heatmap_image
         cur_hand_joints_y = map(lambda x: x + (heatmap_size / 2 - math.floor(heatmap_image.shape[0] / 2)),cur_hand_joints_y)
 
-        cur_hand_joints_x = np.asarray(cur_hand_joints_x)
-        cur_hand_joints_y = np.asarray(cur_hand_joints_y)
         
+        #cur_hand_joints_x = np.asarray(cur_hand_joints_x)
+        #cur_hand_joints_y = np.asarray(cur_hand_joints_y)
+        #print(cur_hand_joints_x)
+
+        cur_hand_joints_x = list(cur_hand_joints_x)
+        cur_hand_joints_y = list(cur_hand_joints_y)
+        #print(cur_hand_joints_x)
+
         if SHOW_INFO:
             hmap = np.zeros((heatmap_size, heatmap_size))
             # Plot joints
@@ -139,7 +150,7 @@ for idx, line in enumerate(gt_content):
                 hmap += part_heatmap * 50
         else:
             for i in range(num_of_joints):
-                output_heatmaps[:, :, i] = cpm_utils.make_gaussian(heatmap_size, gaussian_radius,[cur_hand_joints_x[i], cur_hand_joints_y[i]])
+                output_heatmaps[:, :, i] = cpm_utils.make_gaussian(heatmap_size, gaussian_radius, [cur_hand_joints_x[i], cur_hand_joints_y[i]])
     if SHOW_INFO:
         #cv2.imshow('', hmap.astype(np.uint8))
         #cv2.imshow('i', output_image.astype(np.uint8))

@@ -39,6 +39,7 @@ def read_image(file, boxsize):
 
 
 def make_gaussian(size, fwhm=3, center=None):
+    print(make_gaussian)
     x = np.arange(0, size, 1, float)
     y = x[:, np.newaxis]
 
