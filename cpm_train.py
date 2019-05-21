@@ -24,12 +24,7 @@ color_channel ='RGB'
 
 batch_x, batch_y = tf_utils.read_batch_cpm(tfr_data_files, input_size, heatmap_size, num_of_joints, batch_size)
 
-
-
-
 input_placeholder = tf.placeholder(dtype=tf.float32, shape=(batch_size, input_size, input_size, 3),name='input_placeholer')
-
-
 
 cmap_placeholder = tf.placeholder(dtype=tf.float32, shape=(batch_size, input_size, input_size, 1),
                                       name='cmap_placeholder')
