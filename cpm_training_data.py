@@ -12,7 +12,7 @@ import os
 tfr_file = 'alg2.tfrecords'
 dataset_dir = ''
 
-SHOW_INFO = False
+SHOW_INFO = True
 img_size = 368
 heatmap_size = 46
 num_of_joints = 19
@@ -88,7 +88,8 @@ for idx, line in enumerate(gt_content):
         heatmap_offset = heatmap_image.shape[1] % 2
 
         output_image[:, int(img_size / 2 - math.floor(image.shape[1] / 2)): int(img_size / 2 + math.floor(image.shape[1] / 2) + offset), :] = image
-        heatmap_output_image[:, int(heatmap_size / 2 - math.floor(heatmap_image.shape[1] / 2)): int(heatmap_size / 2 + math.floor(heatmap_image.shape[1] / 2) + heatmap_offset), :] = heatmap_image
+        heatmap_output_image[:, int(heatmap_size / 2 - math.floor(heatmap_image.shape[1] / 2)): int(heatmap_size / 2 + 
+        	math.floor(heatmap_image.shape[1] / 2) + heatmap_offset), :] = heatmap_image
         cur_hand_joints_x = map(lambda x: x + (heatmap_size / 2 - math.floor(heatmap_image.shape[1] / 2)),cur_hand_joints_x)
 
         #cur_hand_joints_x = np.asarray(cur_hand_joints_x)

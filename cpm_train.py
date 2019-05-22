@@ -52,10 +52,10 @@ with tf.Session() as sess:
     init = tf.global_variables_initializer()
     
     sess.run(init)
-    saver.restore(sess,"alg3_iter1.ckpt-1625")
+    #saver.restore(sess,"alg3_iter1.ckpt-1625")
 
-    model.load_weights_from_file(pre_trained_weights, sess, OP_joint=OPENPOSE_joint)
- 
+    #model.load_weights_from_file(pre_trained_weights, sess, OP_joint=OPENPOSE_joint)
+    
     for i in range(0, training_iterations + 1):
         # Read in batch data
         batch_x_np, batch_y_np = sess.run([batch_x,batch_y])
