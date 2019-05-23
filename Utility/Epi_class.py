@@ -1,4 +1,4 @@
-from GeometryUtility import *
+from .GeometryUtility import *
 from random import shuffle
 
 class Camera(object):

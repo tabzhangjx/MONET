@@ -37,7 +37,7 @@ tfr_writer = tf.python_io.TFRecordWriter(tfr_file)
 img_count = 0
 
 vCamera = LoadCameraData('camera.txt')
-vCamera = LoadCameraIntrinsicData('/intrinsic.txt', vCamera)
+vCamera = LoadCameraIntrinsicData('intrinsic.txt', vCamera)
 
 gt_content = open('label.txt', 'rb').readlines()
 

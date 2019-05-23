@@ -1,6 +1,6 @@
 import tensorflow as tf
 import numpy as np
-from Epi_class import *
+from .Epi_class import *
 import math
 import cv2
 

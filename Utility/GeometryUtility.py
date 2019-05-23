@@ -4,7 +4,7 @@ import numpy.random
 import cv2
 from scipy.linalg import qr
 
-from Epi_class import *
+from .Epi_class import *
 from numpy import linalg as LA
 
 def VisualizeJointSortedHeatmap(image_gt, gt, image, heatmap, im_size, confidence):
