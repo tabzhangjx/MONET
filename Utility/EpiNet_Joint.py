@@ -1,8 +1,8 @@
 import tensorflow as tf
 import numpy as np
 # import cpm_net
-from GeometryUtility import *
-from Epi_class import *
+from .GeometryUtility import *
+from .Epi_class import *
 
 
 class EpiNet_pair(object):

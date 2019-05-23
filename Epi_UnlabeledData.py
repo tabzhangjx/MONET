@@ -69,7 +69,7 @@ vCamera_new = []
 time_instance = []
 for idx, line in enumerate(gt_content):
     line = line.split()
-    cur_img_path =  'image/' + line[0]
+    cur_img_path =  'image/' + line[0].decode('utf-8')
     cur_img = cv2.imread(cur_img_path)
     im_full = cur_img
 
@@ -177,7 +177,7 @@ gt_content = open('label.txt', 'rb').readlines()
 
 for idx, line in enumerate(gt_content):
     line = line.split()
-    cur_img_path = 'image/' + line[0]
+    cur_img_path = 'image/' + line[0].decode('utf-8')
     cur_img = cv2.imread(cur_img_path)
     im_full = cur_img
 
@@ -280,7 +280,7 @@ with tf.Session() as sess:
     sess.run(init)
 
     saver = tf.train.Saver(tf.trainable_variables())
-    saver.restore(sess, pretrained_model)
+    #saver.restore(sess, pretrained_model)
     tf.train.start_queue_runners(sess=sess)
 
     n = 0
