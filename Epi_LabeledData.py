@@ -75,6 +75,7 @@ for idx, line in enumerate(gt_content):
     output_image = np.ones(shape=(img_size, img_size, 3)) * 128
     heatmap_output_image = np.ones(shape=(heatmap_size, heatmap_size, 3)) * 128
     output_heatmaps = np.zeros((heatmap_size, heatmap_size, num_of_joints))
+    num_of_limbs = 1
     output_limbs_heatmaps = np.zeros((heatmap_size, heatmap_size, num_of_limbs*2))
 
     # Resize and pad image to fit output image size
