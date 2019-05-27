@@ -66,7 +66,7 @@ def main():
     heatmap_extension_length = 20
     training_iterations = 10000000
 
-    pretrained_model = "alg2.ckpt-2023"
+    pretrained_model = "alg2.ckpt-110"
 
 
     learning_rate = 1e-5
