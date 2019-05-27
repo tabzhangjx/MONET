@@ -381,7 +381,7 @@ for iTime in range(len(time_instance)):
         vCamera_time[iP].heatmap1[:,:,-1] = np.ones((heatmap_size, heatmap_size)) - np.amax(vCamera_time[iP].heatmap1[:,:,:-1], axis=2)
 
     conf = np.sum(confident_joint, axis=0)
-    print(conf)
+    print("conf: ", conf)
     max_camera = np.argmax(conf)
     index_set = GetNearViewCamera(vCamera_time, max_camera, np.pi/5)
     # print("ref %d" % vCamera_time[max_camera].frame)
@@ -489,7 +489,7 @@ for iPair in range(len(pair_ref)):
     tfr_writer.write(raw_sample.SerializeToString())
 
     img_count += 1
-print(img_count)
+print("image count: ", img_count)
 
 tfr_writer.close()
 SavePairData("pair.txt", pair_save)
