@@ -19,7 +19,7 @@ from numpy import linalg as LA
 
 tfr_file = 'training_data_unlabeled_pair.tfrecords'
 tfr_file_ransac = 'js_training_data_unlabeled_ransac.tfrecords'
-pretrained_model = "alg3_iter2.ckpt-595"
+pretrained_model = "alg2.ckpt-103"
 dataset_dir = ''
 
 SHOW_INFO = False
@@ -272,6 +272,9 @@ model.build_model(input_placeholder, batch_size, False)
 
 image_input = np.zeros((batch_size, img_size, img_size, 3))
 
+print("batch_size is", batch_size)
+print("len of vCamera_new is", len(vCamera_new))
+
 with tf.Session() as sess:
     coord = tf.train.Coordinator()
     threads = tf.train.start_queue_runners(coord=coord)
@@ -280,7 +283,7 @@ with tf.Session() as sess:
     sess.run(init)
 
     saver = tf.train.Saver(tf.trainable_variables())
-    #saver.restore(sess, pretrained_model)
+    saver.restore(sess, pretrained_model)
     tf.train.start_queue_runners(sess=sess)
 
     n = 0
