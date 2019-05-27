@@ -19,7 +19,7 @@ from numpy import linalg as LA
 
 tfr_file = 'training_data_unlabeled_pair.tfrecords'
 tfr_file_ransac = 'js_training_data_unlabeled_ransac.tfrecords'
-pretrained_model = "alg2.ckpt-103"
+pretrained_model = "alg2.ckpt-110"
 dataset_dir = ''
 
 SHOW_INFO = False
