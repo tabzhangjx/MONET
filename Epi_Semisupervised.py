@@ -11,7 +11,7 @@ from scipy.interpolate import griddata
 
 import matplotlib.pyplot as plt
 from numpy import linalg as LA
-from StructDefinition import *
+#from StructDefinition import *
 from Utility.DataUtility import *
 from Utility.GeometryUtility import *
 
