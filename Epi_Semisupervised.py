@@ -260,11 +260,12 @@ def main():
                 print("step = ", step)
                 if step % 50 == 0:
                     for j in range(len(vValidationImage)):
+                        print("before run")
                         ref_heatmap \
                             = sess.run(
                             model_val.model_ref.stage_heatmap[stages - 1],
                             feed_dict={model_val.image_ref: vValidationImage[j]})
-
+                        print("after run")
                         # print("validation_loss: %f %f %f" % (total_loss, np.sum(unimodal_loss), np.sum(cross_loss)))
 
                         # print(ref_heatmap.shape)
