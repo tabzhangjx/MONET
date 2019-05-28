@@ -247,6 +247,7 @@ def main():
 
             saver = tf.train.Saver(tf.trainable_variables(), max_to_keep=1000)
             saver.restore(sess, pretrained_model)
+            print("restore succcessfully")
             tf.train.start_queue_runners(sess=sess)
 
             ################################################
@@ -256,6 +257,7 @@ def main():
             nVals = 10
             scale = 2
             for step in range(training_iterations):
+                print("step = ", step)
                 if step % 50 == 0:
                     for j in range(len(vValidationImage)):
                         ref_heatmap \
