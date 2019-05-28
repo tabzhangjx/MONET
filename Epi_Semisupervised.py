@@ -61,8 +61,8 @@ def main():
     stages = 6
     num_of_joints = 19
     num_of_limbs = 1
-    nBatch_supervised = 5
-    nBatch_unsupervised = 6
+    nBatch_supervised = 4
+    nBatch_unsupervised = 4
     heatmap_extension_length = 20
     training_iterations = 10000000
 
