@@ -101,7 +101,7 @@ def main():
                 im = cv2.imread(filename).astype(float)/255
                 vImage.append(im)
                 if iImage%7 == 0:
-                    validation_image[iImage/7,:,:,:] = im
+                    validation_image[int(iImage/7),:,:,:] = im
                     print(filename)
         else:
             for iImage in range(0, validation_frame[iFrame].shape[0], 7):
