@@ -256,7 +256,7 @@ def main():
             ## Train network
             ################################################
 
-            nVals = 10
+            #nVals = 5#10 originally
             scale = 2
             for step in range(training_iterations):
                 print("step = ", step)
