@@ -161,7 +161,7 @@ def main():
     ################################################
     ## Set network
     ################################################
-
+    print("before tf.device")
     with tf.device('/cpu:0'):
 
         image_placeholder = tf.placeholder(dtype=tf.float32, shape=(nBatch_unsupervised, heatmap_size, heatmap_size, 3),
