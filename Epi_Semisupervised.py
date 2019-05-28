@@ -62,7 +62,7 @@ def main():
     num_of_joints = 19
     num_of_limbs = 1
     nBatch_supervised = 4
-    nBatch_unsupervised = 4
+    nBatch_unsupervised = 5
     heatmap_extension_length = 20
     training_iterations = 10000000
 
@@ -80,7 +80,6 @@ def main():
     validation_file = 'validation/val_list.txt'
     validation_frame = LoadValidationData(validation_file)
     print(len(validation_frame))
-
 
     output_path = 'vis/'
     if not os.path.exists(output_path):
