@@ -271,7 +271,7 @@ def main():
                         # print(ref_heatmap.shape)
 
                         vis_all = []
-                        for image_id in range(10):
+                        for image_id in range(nBatch_supervised):
                             v = VisualizeJointHeatmap(vValidationImage[j][image_id, :, :],
                                                                       ref_heatmap[image_id, :, :, :num_of_joints],
                                                                       heatmap_size * scale)
