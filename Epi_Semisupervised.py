@@ -108,7 +108,7 @@ def main():
                 filename = "validation/%07d_%07d.bmp" % (validation_frame[iFrame][iImage, 0], validation_frame[iFrame][iImage, 1])
                 print(filename)
                 im = cv2.imread(filename).astype(float)/255
-                validation_image[iImage/7,:,:,:] = im
+                validation_image[int(iImage/7),:,:,:] = im
         vValidationImage.append(validation_image)
 
         if (len(vValidationImage) > 2):
