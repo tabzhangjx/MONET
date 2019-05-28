@@ -29,7 +29,7 @@ def VisualizeJointSortedHeatmap(image_gt, gt, image, heatmap, im_size, confidenc
         fin = cv2.applyColorMap(fin, cv2.COLORMAP_JET)
         v = cv2.addWeighted(im, 0.5, fin, 0.5, 0)
         font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(v, "%0.2f"%(confidence[j]), (10, 30), font, 1, (255, 255, 255), 2, cv2.CV_AA)
+        cv2.putText(v, "%0.2f"%(confidence[j]), (10, 30), font, 1, (255, 255, 255), 2, cv2.LINE_AA)#change from CV_AA
 
         vis = np.concatenate((vis, v), axis=0)
 
