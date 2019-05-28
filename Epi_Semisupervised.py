@@ -197,6 +197,7 @@ def main():
         tower_grads = []
         with tf.variable_scope(tf.get_variable_scope()):
             for i in range(nGPUs):
+                print(i," = num of nGPUS")
                 with tf.device('/gpu:%d'%gpu_id[i]):
                     with tf.name_scope('net_%d'%gpu_id[i]) as scope:
                         image_batch, heatmap_batch, cropping_param_batch, K_batch, R_batch, C_batch, frame_batch = batch_queue_labeled.dequeue()
@@ -233,7 +234,7 @@ def main():
         variable_averages = tf.train.ExponentialMovingAverage(0.9999, global_step)
         variables_averages_op = variable_averages.apply(tf.trainable_variables())
         train_op = tf.group(apply_gradient_op, variables_averages_op)
-
+        print("before tf.Session")
         with tf.Session(config=tf.ConfigProto(allow_soft_placement=True, log_device_placement=False)) as sess:
 
         # with tf.Session() as sess:
