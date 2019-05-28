@@ -134,6 +134,7 @@ def main():
         if (vPair[iBatch].ref != vis_frame):
             continue
         nVals += 1
+        print("nVals", nVals)
         print("%d %d %d" %(vPair[iBatch].time, vPair[iBatch].ref, vPair[iBatch].src))
         for iImage in range(validation_frame[0].shape[0]):
             if validation_frame[0][iImage, 1] == vPair[iBatch].ref:
@@ -157,7 +158,7 @@ def main():
         if (idx_1 >= nBatch_unsupervised):
             break
 
-    print(nVals)
+    print("nVals", nVals)
 
     ################################################
     ## Set network
