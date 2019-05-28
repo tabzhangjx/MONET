@@ -372,6 +372,7 @@ def main():
                 #     cv2.imwrite("vis/test%05d.jpg" % (step), vis_all)
 
 
+                print("train_start")
 
                 _, loss_value, model_labeled_loss, model_ref_l2_loss, model_ref_confidence, model_modality, \
                 global_step_value = sess.run([train_op,
@@ -382,6 +383,7 @@ def main():
                                               model_val.loss_modality,
                                               global_step])
 
+                print("train_end")
                 # loss_value, model_labeled_loss, model_ref_l2_loss, model_ref_confidence, \
                 # global_step_value = sess.run([
                 #                               model_val.total_loss,
