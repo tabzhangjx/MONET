@@ -308,7 +308,7 @@ def main():
 
                     vis_all = VisualizeJointHeatmap_confident_joint(validation_image_ref[0, :, :], val_ref[0, :, :, :num_of_joints],
                                                     heatmap_size * scale, validation_confidence[0,:])
-
+                    print("nVals: ", nVals)
                     for j in range(nVals):
                         v = VisualizeJointHeatmap(validation_image_src[j, :, :], val_src[j, :, :, :num_of_joints],
                                                   heatmap_size * scale)
