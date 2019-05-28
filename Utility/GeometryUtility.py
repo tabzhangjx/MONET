@@ -155,7 +155,7 @@ def VisualizeJointHeatmap_confident_joint(image, heatmap, im_size, confident_joi
         v1 = cv2.addWeighted(image, 0.5, fin, 0.5, 0)
 
         font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(v1, "%.02f" % (confident_joint[joint_id]), (10, 20), font, 0.5, (255, 255, 255), 1, cv2.CV_AA)
+        cv2.putText(v1, "%.02f" % (confident_joint[joint_id]), (10, 20), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)#CV_AA
 
         if (joint_id == 0):
             vis = v1
