@@ -48,6 +48,35 @@ def average_gradients(tower_grads):
         average_grads.append(grad_and_var)
     return average_grads
 
+def set_validation_data(validation_frame, nBatch_unsupervised, input_size):
+    vValidationImage = []
+    vImage = []
+    validation_size = 12
+    print("len validation_frame: ", len(validation_frame))
+    for iFrame in range(len(validation_frame)):
+        validation_image = np.zeros((nBatch_unsupervised, input_size, input_size, 3))
+        if iFrame == 0:
+            print(validation_frame[iFrame].shape[0])
+            for iImage in range(validation_frame[iFrame].shape[0]):
+                filename = "validation/%07d_%07d.bmp" % (validation_frame[iFrame][iImage, 0], validation_frame[iFrame][iImage, 1])
+                print(filename)
+                im = cv2.imread(filename).astype(float)/255
+                vImage.append(im)
+                if iImage%validation_size == 0:
+                    validation_image[int(iImage/validation_size),:,:,:] = im
+                    print(filename)
+        else:
+            for iImage in range(0, validation_frame[iFrame].shape[0], validation_size):
+                filename = "validation/%07d_%07d.bmp" % (validation_frame[iFrame][iImage, 0], validation_frame[iFrame][iImage, 1])
+                print(filename)
+                im = cv2.imread(filename).astype(float)/255
+                validation_image[int(iImage/validation_size),:,:,:] = im
+        vValidationImage.append(validation_image)
+
+        if (len(vValidationImage) > 2):
+            break
+
+
 def main():
     gpu_id = [0]
     nGPUs = len(gpu_id)
@@ -89,32 +118,7 @@ def main():
     ################################################
     ## Set validation data
     ################################################
-    vValidationImage = []
-    vImage = []
-    validation_size = 12
-    print("len validation_frame: ", len(validation_frame))
-    for iFrame in range(len(validation_frame)):
-        validation_image = np.zeros((nBatch_unsupervised, input_size, input_size, 3))
-        if iFrame == 0:
-            print(validation_frame[iFrame].shape[0])
-            for iImage in range(validation_frame[iFrame].shape[0]):
-                filename = "validation/%07d_%07d.bmp" % (validation_frame[iFrame][iImage, 0], validation_frame[iFrame][iImage, 1])
-                print(filename)
-                im = cv2.imread(filename).astype(float)/255
-                vImage.append(im)
-                if iImage%validation_size == 0:
-                    validation_image[int(iImage/validation_size),:,:,:] = im
-                    print(filename)
-        else:
-            for iImage in range(0, validation_frame[iFrame].shape[0], validation_size):
-                filename = "validation/%07d_%07d.bmp" % (validation_frame[iFrame][iImage, 0], validation_frame[iFrame][iImage, 1])
-                print(filename)
-                im = cv2.imread(filename).astype(float)/255
-                validation_image[int(iImage/validation_size),:,:,:] = im
-        vValidationImage.append(validation_image)
-
-        if (len(vValidationImage) > 2):
-            break
+    set_validation_data(validation_frame, nBatch_unsupervised, input_size)
 
     validation_image_ref = np.zeros((nBatch_unsupervised, input_size, input_size, 3))
     validation_image_src = np.zeros((nBatch_unsupervised, input_size, input_size, 3))
