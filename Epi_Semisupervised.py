@@ -138,7 +138,7 @@ def main():
     num_of_joints = 19
     num_of_limbs = 1
     nBatch_supervised = 1
-    nBatch_unsupervised = 3
+    nBatch_unsupervised = 1
     heatmap_extension_length = 20
     training_iterations = 10000000
 
@@ -165,7 +165,7 @@ def main():
     ################################################
     ## Set validation data
     ################################################
-    set_validation_data(validation_frame, nBatch_unsupervised, input_size, num_of_joints, vPair)
+    #set_validation_data(validation_frame, nBatch_unsupervised, input_size, num_of_joints, vPair)
 
     
     ################################################
