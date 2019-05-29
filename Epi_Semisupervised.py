@@ -48,7 +48,7 @@ def average_gradients(tower_grads):
         average_grads.append(grad_and_var)
     return average_grads
 
-def set_validation_data(validation_frame, nBatch_unsupervised, input_size, num_of_joints):
+def set_validation_data(validation_frame, nBatch_unsupervised, input_size, num_of_joints, vPair):
     vValidationImage = []
     vImage = []
     validation_size = 12
@@ -165,7 +165,7 @@ def main():
     ################################################
     ## Set validation data
     ################################################
-    set_validation_data(validation_frame, nBatch_unsupervised, input_size, num_of_joints)
+    set_validation_data(validation_frame, nBatch_unsupervised, input_size, num_of_joints, vPair)
 
     
     ################################################
