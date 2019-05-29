@@ -76,50 +76,6 @@ def set_validation_data(validation_frame, nBatch_unsupervised, input_size):
         if (len(vValidationImage) > 2):
             break
 
-
-def main():
-    gpu_id = [0]
-    nGPUs = len(gpu_id)
-
-    tfr_labeled_data_files = 'training_data.tfrecords'
-
-    tfr_unlabeled_data_files = 'training_data_unlabeled_pair.tfrecords'
-
-    input_size = 368
-    heatmap_size = 46
-    stages = 6
-    num_of_joints = 19
-    num_of_limbs = 1
-    nBatch_supervised = 1
-    nBatch_unsupervised = 3
-    heatmap_extension_length = 20
-    training_iterations = 10000000
-
-    pretrained_model = "alg2.ckpt-110"
-
-
-    learning_rate = 1e-5
-    lr_decay_rate = 0.5
-    # lr_decay_step = 1000*30
-    lr_decay_step = 2000
-    color_channel = 'RGB'
-
-    vPair = LoadPairData('pair.txt')
-
-    validation_file = 'validation/val_list.txt'
-    validation_frame = LoadValidationData(validation_file)
-    print(len(validation_frame))
-
-    output_path = 'vis/'
-    if not os.path.exists(output_path):
-        os.makedirs(output_path)
-
-
-    ################################################
-    ## Set validation data
-    ################################################
-    set_validation_data(validation_frame, nBatch_unsupervised, input_size)
-
     validation_image_ref = np.zeros((nBatch_unsupervised, input_size, input_size, 3))
     validation_image_src = np.zeros((nBatch_unsupervised, input_size, input_size, 3))
     validation_H1 = np.zeros((nBatch_unsupervised, 3, 3))
@@ -165,6 +121,53 @@ def main():
 
     print("nVals", nVals)
 
+    return iImage
+
+
+def main():
+    gpu_id = [0]
+    nGPUs = len(gpu_id)
+
+    tfr_labeled_data_files = 'training_data.tfrecords'
+
+    tfr_unlabeled_data_files = 'training_data_unlabeled_pair.tfrecords'
+
+    input_size = 368
+    heatmap_size = 46
+    stages = 6
+    num_of_joints = 19
+    num_of_limbs = 1
+    nBatch_supervised = 1
+    nBatch_unsupervised = 3
+    heatmap_extension_length = 20
+    training_iterations = 10000000
+
+    pretrained_model = "alg2.ckpt-110"
+
+
+    learning_rate = 1e-5
+    lr_decay_rate = 0.5
+    # lr_decay_step = 1000*30
+    lr_decay_step = 2000
+    color_channel = 'RGB'
+
+    vPair = LoadPairData('pair.txt')
+
+    validation_file = 'validation/val_list.txt'
+    validation_frame = LoadValidationData(validation_file)
+    print(len(validation_frame))
+
+    output_path = 'vis/'
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+
+
+    ################################################
+    ## Set validation data
+    ################################################
+    set_validation_data(validation_frame, nBatch_unsupervised, input_size)
+
+    
     ################################################
     ## Set network
     ################################################
