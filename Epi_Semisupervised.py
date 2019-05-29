@@ -268,116 +268,116 @@ def main():
             scale = 2
             for step in range(training_iterations):
                 print("step = ", step)
-                if step % 50 == 0:
-                    for j in range(len(vValidationImage)):
-                        print("before run")
-                        ref_heatmap \
-                            = sess.run(
-                            model_val.model_ref.stage_heatmap[stages - 1],
-                            feed_dict={model_val.image_ref: vValidationImage[j]})
-                        print("after run")
-                        # print("validation_loss: %f %f %f" % (total_loss, np.sum(unimodal_loss), np.sum(cross_loss)))
+                # if step % 50 == 0:
+                #     for j in range(len(vValidationImage)):
+                #         print("before run")
+                #         ref_heatmap \
+                #             = sess.run(
+                #             model_val.model_ref.stage_heatmap[stages - 1],
+                #             feed_dict={model_val.image_ref: vValidationImage[j]})
+                #         print("after run")
+                #         # print("validation_loss: %f %f %f" % (total_loss, np.sum(unimodal_loss), np.sum(cross_loss)))
 
-                        # print(ref_heatmap.shape)
+                #         # print(ref_heatmap.shape)
 
-                        vis_all = []
-                        for image_id in range(nBatch_supervised):
-                            v = VisualizeJointHeatmap(vValidationImage[j][image_id, :, :],
-                                                                      ref_heatmap[image_id, :, :, :num_of_joints],
-                                                                      heatmap_size * scale)
-                            if (image_id == 0):
-                                vis_all = v
-                            else:
-                                vis_all = np.concatenate((vis_all, v), axis=0)
+                #         vis_all = []
+                #         for image_id in range(nBatch_supervised):
+                #             v = VisualizeJointHeatmap(vValidationImage[j][image_id, :, :],
+                #                                                       ref_heatmap[image_id, :, :, :num_of_joints],
+                #                                                       heatmap_size * scale)
+                #             if (image_id == 0):
+                #                 vis_all = v
+                #             else:
+                #                 vis_all = np.concatenate((vis_all, v), axis=0)
 
-                        cv2.imwrite("vis/prediction_confi%03d_%05d.jpg" % (j, step), vis_all)
+                #         cv2.imwrite("vis/prediction_confi%03d_%05d.jpg" % (j, step), vis_all)
 
-                    val_ref, val_src, val_comb, val_out_src, val_out_ref, val_loss_cross, loss1\
-                        = sess.run([model_val.model_ref.stage_heatmap[stages - 1],
-                                    model_val.model_src.stage_heatmap[stages - 1],
-                                    model_val.pred01,
-                                    model_val.out_src,
-                                    model_val.out_ref,
-                                    model_val.loss_cross,
-                                    model_val.l2_loss],
-                                   feed_dict={model_val.image_ref: validation_image_ref,
-                                              model_val.image_src: validation_image_src,
-                                              model_val.H1: validation_H1,
-                                              model_val.H01: validation_H01,
-                                              model_val.H01_inv: validation_H01_inv,
-                                              model_val.a: validation_a,
-                                              model_val.b: validation_b
-                                              })
+                #     val_ref, val_src, val_comb, val_out_src, val_out_ref, val_loss_cross, loss1\
+                #         = sess.run([model_val.model_ref.stage_heatmap[stages - 1],
+                #                     model_val.model_src.stage_heatmap[stages - 1],
+                #                     model_val.pred01,
+                #                     model_val.out_src,
+                #                     model_val.out_ref,
+                #                     model_val.loss_cross,
+                #                     model_val.l2_loss],
+                #                    feed_dict={model_val.image_ref: validation_image_ref,
+                #                               model_val.image_src: validation_image_src,
+                #                               model_val.H1: validation_H1,
+                #                               model_val.H01: validation_H01,
+                #                               model_val.H01_inv: validation_H01_inv,
+                #                               model_val.a: validation_a,
+                #                               model_val.b: validation_b
+                #                               })
 
-                    # print(val_out_ref)
-                    #
-                    # print(loss1)
-                    # print(loss2)
-                    print("val_loss: %f %f" % (val_loss_cross, 0))
+                #     # print(val_out_ref)
+                #     #
+                #     # print(loss1)
+                #     # print(loss2)
+                #     print("val_loss: %f %f" % (val_loss_cross, 0))
 
-                    vis_all = VisualizeJointHeatmap_confident_joint(validation_image_ref[0, :, :], val_ref[0, :, :, :num_of_joints],
-                                                    heatmap_size * scale, validation_confidence[0,:])
-                    print("nVals: ", nVals)
-                    for j in range(nVals):
-                        v = VisualizeJointHeatmap(validation_image_src[j, :, :], val_src[j, :, :, :num_of_joints],
-                                                  heatmap_size * scale)
-                        vis_all = np.concatenate((vis_all, v), axis=0)
+                #     vis_all = VisualizeJointHeatmap_confident_joint(validation_image_ref[0, :, :], val_ref[0, :, :, :num_of_joints],
+                #                                     heatmap_size * scale, validation_confidence[0,:])
+                #     print("nVals: ", nVals)
+                #     for j in range(nVals):
+                #         v = VisualizeJointHeatmap(validation_image_src[j, :, :], val_src[j, :, :, :num_of_joints],
+                #                                   heatmap_size * scale)
+                #         vis_all = np.concatenate((vis_all, v), axis=0)
 
-                    cv2.imwrite("vis/cross%05d.jpg" % (step), vis_all)
+                #     cv2.imwrite("vis/cross%05d.jpg" % (step), vis_all)
 
-                    vis_all = VisualizeJointHeatmap_confident_joint(validation_image_ref[0, :, :], val_ref[0, :, :, :num_of_joints],
-                                                    heatmap_size * scale, validation_confidence[0,:])
+                #     vis_all = VisualizeJointHeatmap_confident_joint(validation_image_ref[0, :, :], val_ref[0, :, :, :num_of_joints],
+                #                                     heatmap_size * scale, validation_confidence[0,:])
 
-                    com = np.zeros((heatmap_size, heatmap_size, num_of_joints))
-                    for j in range(nVals):
-                        com += val_comb[j, :, :, :num_of_joints]
+                #     com = np.zeros((heatmap_size, heatmap_size, num_of_joints))
+                #     for j in range(nVals):
+                #         com += val_comb[j, :, :, :num_of_joints]
 
-                    v = VisualizeJointHeatmap(validation_image_ref[j, :, :], com,
-                                              heatmap_size * scale)
-                    vis_all = np.concatenate((vis_all, v), axis=0)
+                #     v = VisualizeJointHeatmap(validation_image_ref[j, :, :], com,
+                #                               heatmap_size * scale)
+                #     vis_all = np.concatenate((vis_all, v), axis=0)
 
-                    for j in range(nVals):
-                        v = VisualizeJointHeatmap(validation_image_ref[j, :, :], val_comb[j, :, :, :num_of_joints],
-                                                  heatmap_size * scale)
-                        vis_all = np.concatenate((vis_all, v), axis=0)
+                #     for j in range(nVals):
+                #         v = VisualizeJointHeatmap(validation_image_ref[j, :, :], val_comb[j, :, :, :num_of_joints],
+                #                                   heatmap_size * scale)
+                #         vis_all = np.concatenate((vis_all, v), axis=0)
 
-                    cv2.imwrite("vis/cross_j%05d.jpg" % (step), vis_all)
+                #     cv2.imwrite("vis/cross_j%05d.jpg" % (step), vis_all)
 
 
 
-                    ######################3
-                    ## Test
-                    #
-                    image = cv2.resize(validation_image_ref[0, :, :], (heatmap_size, heatmap_size),
-                                       interpolation=cv2.INTER_LANCZOS4)
-                    image = np.expand_dims(image, axis=0)
-                    image = np.tile(image, np.stack([nBatch_unsupervised, 1, 1, 1]))
+                #     ######################3
+                #     ## Test
+                #     #
+                #     image = cv2.resize(validation_image_ref[0, :, :], (heatmap_size, heatmap_size),
+                #                        interpolation=cv2.INTER_LANCZOS4)
+                #     image = np.expand_dims(image, axis=0)
+                #     image = np.tile(image, np.stack([nBatch_unsupervised, 1, 1, 1]))
 
-                    warped_image_np = sess.run(warped_image,
-                                           feed_dict={image_placeholder: image,
-                                                      H_ref_placeholder: validation_H01})
+                #     warped_image_np = sess.run(warped_image,
+                #                            feed_dict={image_placeholder: image,
+                #                                       H_ref_placeholder: validation_H01})
 
-                    out_ref_np = np.expand_dims(val_out_ref, axis=2)
-                    out_ref_np = np.tile(out_ref_np, np.stack([1, 1, heatmap_size + 2 * heatmap_extension_length, 1]))
+                #     out_ref_np = np.expand_dims(val_out_ref, axis=2)
+                #     out_ref_np = np.tile(out_ref_np, np.stack([1, 1, heatmap_size + 2 * heatmap_extension_length, 1]))
 
-                    out_src_np = np.expand_dims(val_out_src, axis=2)
-                    out_src_np = np.tile(out_src_np, np.stack([1, 1, heatmap_size + 2 * heatmap_extension_length, 1]))
+                #     out_src_np = np.expand_dims(val_out_src, axis=2)
+                #     out_src_np = np.tile(out_src_np, np.stack([1, 1, heatmap_size + 2 * heatmap_extension_length, 1]))
 
-                    vis_all = VisualizeJointHeatmap1(warped_image_np[0, :, :], out_ref_np[0, :, :, :num_of_joints],
-                                                    heatmap_size * scale)
-                    v = VisualizeJointHeatmap1(warped_image_np[0, :, :], out_src_np[0, :, :, :num_of_joints],
-                                              heatmap_size * scale)
-                    vis_all = np.concatenate((vis_all, v), axis=1)
+                #     vis_all = VisualizeJointHeatmap1(warped_image_np[0, :, :], out_ref_np[0, :, :, :num_of_joints],
+                #                                     heatmap_size * scale)
+                #     v = VisualizeJointHeatmap1(warped_image_np[0, :, :], out_src_np[0, :, :, :num_of_joints],
+                #                               heatmap_size * scale)
+                #     vis_all = np.concatenate((vis_all, v), axis=1)
 
-                    for j in range(1,nVals):
-                        v = VisualizeJointHeatmap1(warped_image_np[j, :, :], out_ref_np[j, :, :, :num_of_joints],
-                                                        heatmap_size * scale)
-                        vis_all = np.concatenate((vis_all, v), axis=1)
-                        v = VisualizeJointHeatmap1(warped_image_np[j, :, :], out_src_np[j, :, :, :num_of_joints],
-                                                  heatmap_size * scale)
-                        vis_all = np.concatenate((vis_all, v), axis=1)
+                #     for j in range(1,nVals):
+                #         v = VisualizeJointHeatmap1(warped_image_np[j, :, :], out_ref_np[j, :, :, :num_of_joints],
+                #                                         heatmap_size * scale)
+                #         vis_all = np.concatenate((vis_all, v), axis=1)
+                #         v = VisualizeJointHeatmap1(warped_image_np[j, :, :], out_src_np[j, :, :, :num_of_joints],
+                #                                   heatmap_size * scale)
+                #         vis_all = np.concatenate((vis_all, v), axis=1)
 
-                    cv2.imwrite("vis/test%05d.jpg" % (step), vis_all)
+                #     cv2.imwrite("vis/test%05d.jpg" % (step), vis_all)
 
 
 
