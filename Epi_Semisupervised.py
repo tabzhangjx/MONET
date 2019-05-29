@@ -276,7 +276,7 @@ def main():
     ################################################
     ## Set validation data
     ################################################
-    set_validation_data(validation_frame, nBatch_unsupervised, input_size, num_of_joints, vPair)
+    #set_validation_data(validation_frame, nBatch_unsupervised, input_size, num_of_joints, vPair)
 
     
     ################################################
