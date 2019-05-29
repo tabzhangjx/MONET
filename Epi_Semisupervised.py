@@ -61,8 +61,8 @@ def main():
     stages = 6
     num_of_joints = 19
     num_of_limbs = 1
-    nBatch_supervised = 4
-    nBatch_unsupervised = 5
+    nBatch_supervised = 1
+    nBatch_unsupervised = 3
     heatmap_extension_length = 20
     training_iterations = 10000000
 
@@ -91,6 +91,7 @@ def main():
     ################################################
     vValidationImage = []
     vImage = []
+    validation_size = 12
     print("len validation_frame: ", len(validation_frame))
     for iFrame in range(len(validation_frame)):
         validation_image = np.zeros((nBatch_unsupervised, input_size, input_size, 3))
@@ -101,15 +102,15 @@ def main():
                 print(filename)
                 im = cv2.imread(filename).astype(float)/255
                 vImage.append(im)
-                if iImage%7 == 0:
-                    validation_image[int(iImage/7),:,:,:] = im
+                if iImage%validation_size == 0:
+                    validation_image[int(iImage/validation_size),:,:,:] = im
                     print(filename)
         else:
-            for iImage in range(0, validation_frame[iFrame].shape[0], 7):
+            for iImage in range(0, validation_frame[iFrame].shape[0], validation_size):
                 filename = "validation/%07d_%07d.bmp" % (validation_frame[iFrame][iImage, 0], validation_frame[iFrame][iImage, 1])
                 print(filename)
                 im = cv2.imread(filename).astype(float)/255
-                validation_image[int(iImage/7),:,:,:] = im
+                validation_image[int(iImage/validation_size),:,:,:] = im
         vValidationImage.append(validation_image)
 
         if (len(vValidationImage) > 2):
