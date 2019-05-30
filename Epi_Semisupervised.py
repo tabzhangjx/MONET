@@ -203,7 +203,7 @@ def vali_train():
         ######################3
         ## Test
         ######################
-        
+
         image = cv2.resize(validation_image_ref[0, :, :], (heatmap_size, heatmap_size),
                                        interpolation=cv2.INTER_LANCZOS4)
         image = np.expand_dims(image, axis=0)
@@ -248,8 +248,8 @@ def main():
     stages = 6
     num_of_joints = 19
     num_of_limbs = 1
-    nBatch_supervised = 1
-    nBatch_unsupervised = 1
+    nBatch_supervised = 5
+    nBatch_unsupervised = 6
     heatmap_extension_length = 20
     training_iterations = 10000000
 
